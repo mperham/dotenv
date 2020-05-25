@@ -1,16 +1,18 @@
 # dotenv
 
-Load contents of .env into child processes. Every other dotenv library
+Load the contents of `.env` into child processes. Every other dotenv library
 wants you to manually call the setup in your application. I'm not sure
-why.
+why?
 
 ## Installation
 
 ```
-go install github.com/mperham/dotenv
+go get github.com/mperham/dotenv
 ```
 
 There are no dependencies except the Go toolchain required to build.
+If you have GOPATH=$HOME, it will install `dotenv` in $HOME/bin. See
+`go help install` for full details.
 
 ## Usage
 
