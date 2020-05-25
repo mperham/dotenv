@@ -236,8 +236,8 @@ func doubleQuoteEscape(line string) string {
 
 func main() {
 	// take rest of args and "exec" them
-	cmd := os.Args[0]
-	cmdArgs := os.Args[1:]
+	cmd := os.Args[1]
+	cmdArgs := os.Args[2:]
 
 	err := execWithEnv(cmd, cmdArgs)
 	if err != nil {
