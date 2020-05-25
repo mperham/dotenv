@@ -17,12 +17,21 @@ If you have GOPATH=$HOME, it will install `dotenv` in $HOME/bin. See
 ## Usage
 
 ```
-> echo "TF_LOG=1" > .env
+> cat .env
+# comments are allowed
+TF_LOG=1
+# substitutations work...
+FILENAME=$HOME/somefile.txt
+TF_VAR_faktory_version=1.4.0-1
+
 > ruby -e "puts ENV['TF_LOG']"
 <empty>
-> dotenv ruby -e "puts ENV['TF_LOG']"
-1
+> dotenv ruby -e "puts ENV['FILENAME']"
+/Users/mikeperham/somefile.txt
 ```
+
+I use dotenv to load variables into Terraform, like `dotenv terraform apply`.
+Terraform recognizes anything that starts with `TF_VAR_`.
 
 ## License
 

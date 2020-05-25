@@ -209,7 +209,12 @@ func expandVariables(v string, m map[string]string) string {
 		if submatch[1] == "\\" || submatch[2] == "(" {
 			return submatch[0][1:]
 		} else if submatch[4] != "" {
-			return m[submatch[4]]
+			key := submatch[4]
+			val := m[key]
+			if val == "" {
+				val, _ = os.LookupEnv(key)
+			}
+			return val
 		}
 		return s
 	})
