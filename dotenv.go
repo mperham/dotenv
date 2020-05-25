@@ -27,7 +27,7 @@ import (
 const doubleQuoteSpecialChars = "\\\n\r\"!$`"
 
 func parse(r io.Reader) (map[string]string, error) {
-	envMap = make(map[string]string)
+	envMap := make(map[string]string)
 
 	var lines []string
 	scanner := bufio.NewScanner(r)
@@ -35,22 +35,21 @@ func parse(r io.Reader) (map[string]string, error) {
 		lines = append(lines, scanner.Text())
 	}
 
-	if err = scanner.Err(); err != nil {
+	if err := scanner.Err(); err != nil {
 		return nil, err
 	}
 
 	for _, fullLine := range lines {
 		if !isIgnoredLine(fullLine) {
 			var key, value string
-			key, value, err = parseLine(fullLine, envMap)
-
+			key, value, err := parseLine(fullLine, envMap)
 			if err != nil {
 				return nil, err
 			}
 			envMap[key] = value
 		}
 	}
-	return errMap, nil
+	return envMap, nil
 }
 
 func execWithEnv(cmd string, cmdArgs []string) error {
@@ -141,7 +140,7 @@ func parseLine(line string, envMap map[string]string) (string, string, error) {
 	}
 
 	// Parse the key
-	key = splitString[0]
+	key := splitString[0]
 	if strings.HasPrefix(key, "export") {
 		key = strings.TrimPrefix(key, "export")
 	}
@@ -150,7 +149,7 @@ func parseLine(line string, envMap map[string]string) (string, string, error) {
 	key = exportRegex.ReplaceAllString(splitString[0], "$1")
 
 	// Parse the value
-	value = parseValue(splitString[1], envMap)
+	value := parseValue(splitString[1], envMap)
 	return key, value, nil
 }
 
